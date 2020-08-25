@@ -9,7 +9,8 @@ function instanceOf(left,right) {
   }
 }
 
-
+let arr = [1,2,3,4]
+console.log(instanceOf(arr,Array))
 // 判断letf，right是不是在一条原型链上
 //首先需要知道的是原型链，每个构造函数都有一个prototype属性，指向它的原型对象，同
 //时这个构造函数具备，一个constructor属性，它指向的是它的构造函数
