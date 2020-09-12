@@ -22,6 +22,16 @@ var reverseList = function(head) {
   return prev
 };
 
+//创建一个哨兵节点prev指向null
+//设置一个curr指向head
+//遍历整个链表(条件：直到当curr指向不为null时)
+//在遍历过程中，让curr的指针指向next
+//将next指向prev
+//将prev指向curr
+//将curr指向next
+
+
+
 /**
  * Definition for singly-linked list.
  * function ListNode(val) {
@@ -29,7 +39,7 @@ var reverseList = function(head) {
  *     this.next = null;
  * }
  */
-/**
+/** 
  * @param {ListNode} head
  * @return {ListNode}
  */
