@@ -16,6 +16,41 @@ Function.prototype.myBind = function(thisArg) {
   fnBound.prototype = this.prototype;
   return fnBound;
 }
+
+
+
+
+//9/19
+Function.prototype.myBind = function (thisAry) {
+  if(typeof this !== 'function'){
+    return ;
+  }
+  var _self = this;
+  var args = Array.prototype.slice.call(arguments,1)
+  var fnBound = function () {
+    var _this = this instanceof _self ? this : thisAry;
+    return _self.apply(_this,args.concat(Array.prototype.slice.concat(arguments)));
+  }
+  fnBound.prototype = this.prototype
+  return fnBound;
+}
+
+//9/20
+Function.prototype.myBind = function (thisAry) {
+  if(typeof this !== 'function'){
+    return ;
+  }
+  var args = Array.prototype.slice.call(arguments,1)
+  var fnBound = function () {
+    var _this = this instanceof _self ? this : thisAry;
+    return _self.apply(_this,args.concat(Array.prototype.slice.concat(arguments)));
+  }
+  fnBound.prototype = this.prototype
+  return fnBound;
+}
+
+
+
 //测试
 const obj = { name: '写代码像蔡徐抻' }
 function foo() {

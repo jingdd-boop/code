@@ -22,9 +22,24 @@ foo.myApply(obj, [])     // 输出'写代码像蔡徐抻'
 //3、myApply的args传给fn
 
 
-
-
-
+//9/18
+Function.prototype.myApply = function (thisArg) {
+  if(typeof this != 'function'){
+    throw new TypeError('error')
+  }
+  if(!Array.isArray(arguments[1])){
+    throw new TypeError('error')
+  }
+  const fn = Symbol('fn')
+  thisArg = thisArg || window
+  thisArg[fn] = this
+  const args = arguments[1]
+  const result = thisArg[fn](args)
+  delete thisArg[fn]
+  return result
+}
+//先判断，this指向的是不是函数，第二第二项需要为数组，
+//第三指定方法唯一，第四指向，第五指行，第六删除，第七返回
 
 
 
