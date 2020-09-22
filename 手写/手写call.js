@@ -1,3 +1,5 @@
+
+
 function foo(){
   console.log(this.name)
 }
@@ -64,6 +66,23 @@ Function.prototype.myCall = function (thisArg,...args) {
   return result
 }
 
+
+//9/22
+Function.prototype.myCall = function (thisArg,...args) {
+  if(typeof this != 'function'){
+    throw new TypeError('error')
+  }
+  const fn = Symbol('fn')
+  thisArg = thisArg || window
+  thisArg[fn] = this
+  const result = thisArg[fn](...args)
+  delete thisArg[fn]
+  return result;
+}
+//1.判断是否为函数2。定义一个唯一的方法，this指向本身还是window对象3。将this指向绑定带该方法上
+//4.执行该方法，并把它赋值到result上5.删除这个方法，返回result
+
+//调用有指定this值和参数的函数的结果。若该方法没有返回值，则返回 undefined。
 
 //call方法的作用
 //1。使用call调用函数并且指定this

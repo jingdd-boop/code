@@ -40,10 +40,30 @@ Function.prototype.myApply = function (thisArg) {
 }
 //先判断，this指向的是不是函数，第二第二项需要为数组，
 //第三指定方法唯一，第四指向，第五指行，第六删除，第七返回
+//用调用者提供的 this 值和参数调用该函数的返回值。
+//9/22
 
+Function.prototype.myApply = function (thisArg) {
+  if(typeof this != 'function'){
+    throw new TypeError('error')
+  }
+  if(!Array.isArray(arguments[1])){
+    throw new TypeError('error')
+  }
+  const fn = Symbol('fn')
+  thisArg = thisArg || window
+  thisArg[fn] = this;
+  const args = arguments[1]
+  const result = thisArg[fn](args)
+  delete thisArg[fn]
+  return result
+}
 
-
-
+//1.判断this指向是否为函数，还有是否为数组
+//2.设置唯一的方法属性，确定thisArg的指向，
+//3、把this的指向绑定到thisArg[fn]
+//4.执行该方法，(记得加参数数组)
+//5.删除该方法，返回result
 
 Function.prototype.myApply = function (context,args){
   //Function是构造函数，Function.prototype指向该构造函数的原型对象，
