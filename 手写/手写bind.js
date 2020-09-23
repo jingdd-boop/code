@@ -55,7 +55,6 @@ Function.prototype.myBind = function (thisArg) {
   }
   var _self = this;
   var args = Array.prototype.slice.call(arguments,1)
-  //类数组方法提取数组除了第一项的后部分元素
   var fnBound = function () {
     var _this = this instanceof _self ? this : thisArg;
     return _self.apply(_this,args.concat(Array.prototype.slice.call(arguments)));
@@ -66,10 +65,10 @@ Function.prototype.myBind = function (thisArg) {
 
 //返回一个原函数的拷贝，并拥有指定的 this 值和初始参数。
 //测试
-const obj = { name: '写代码像蔡徐抻' }
+const obj = { name: 'jing' }
 function foo() {
   console.log(this.name)
   console.log(arguments)
 }
 
-foo.myBind(obj, 'a', 'b', 'c')()    //输出写代码像蔡徐抻 ['a', 'b', 'c']
+foo.myBind(obj, 'a', 'b', 'c')()    
