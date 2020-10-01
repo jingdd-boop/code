@@ -34,7 +34,18 @@ var reverseList = function(head) {
   return prev;
 }
 
-
+//9/18
+var revereList = function(head) {
+  let prev = null;
+  let curr = head;
+  while(curr != null){
+    let next = curr.next;
+    curr.next = prev;
+    prev = curr;
+    curr = next;
+  }
+  return prev;
+}
 //创建一个哨兵节点prev指向null
 //设置一个curr指向head
 //遍历整个链表(条件：直到当curr指向不为null时)
