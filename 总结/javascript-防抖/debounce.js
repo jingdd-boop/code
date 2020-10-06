@@ -28,7 +28,7 @@
 //   }
 // }
 
-//第二版
+//第二版 
 // function  debounce(func,wait) {
 //   var timeout;
 //   return function () {
@@ -54,19 +54,19 @@
 //   }
 // }
 
-//2020/9/28
-// function debounce(func,wait){
-//   var timeout;
-//   return function (){
-//     var context = this;
-//     var args = arguments;
+2020/9/28
+function debounce(func,wait){
+  var timeout;
+  return function (){
+    var context = this;
+    var args = arguments;
 
-//     clearTimeout(timeout)
-//     timeout = setTimeout(function () {
-//       func.apply(context,args)
-//     },wait)
-//   }
-// }
+    clearTimeout(timeout)
+    timeout = setTimeout(function () {
+      func.apply(context,args)
+    },wait)
+  }
+}
 
 var count = 1;
 var container = document.getElementById('container');
