@@ -55,3 +55,5 @@ function ajax(url,method) {
     xhr.send(null)
   })
 }
+
+//1

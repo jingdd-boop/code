@@ -56,3 +56,4 @@ console.log(fn("a", "b", "c"))  // ["a", "b", "c"]
 console.log(fn("a", "b")("c"))  // ["a", "b", "c"]
 console.log(fn("a")("b")("c"))  // ["a", "b", "c"]
 console.log(fn("a")("b", "c"))  // ["a", "b", "c"]
+

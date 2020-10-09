@@ -10,5 +10,14 @@ function shallowClone(source) {
   return target;
 }
 
+
+
 //所有继承了 Object 的对象都会继承到 hasOwnProperty 方法。这个方法可以用来检测一个对象是否含有特定的自身属性；
 //和 in 运算符不同，该方法会忽略掉那些从原型链上继承到的属性。
+
+//1....实现
+
+let copy1 = {...{x:1}}
+
+//2.
+let copy2 = Object.assign({},{x:1})
