@@ -24,3 +24,30 @@ var isPalindrome = function(head) {
   }
   return true;
 }
+
+//10/11
+var isPalindrome = function(head) {
+  if(head === null && head.next === null) return true
+  let mid = head;
+  let pre = null;
+  let rev = null;
+  while(head !== null && head.next !== null) {
+    pre = mid;
+    mid = mid.next;
+    head = head.next.next;
+    pre.next = rev;
+    rev = pre;
+  } 
+
+  //奇数时，mid再向后移一位
+  if(head) mid = mid.next;
+  //比较前部分和后部分的值是否一致
+  while(head !== null && head.next !== null) {
+    if(rev.val !== mid.val) return false;
+
+    rev = rev.next;
+    mid = mid.next;
+  }
+  return true;
+}
+// 取链表中间值，迭代反转前部分链表；
