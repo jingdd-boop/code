@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>方法二</title>
+  <style>
+  .news{
+    background-color: aqua;
+    border:solid 1px black;
+    overflow:hidden;
+  }
+  .news img {
+    float: left;
+  }
+  .news p {
+    float: left;
+  }
+  </style>
+  
+</head>
+给浮动元素的父容器添加overflow:hidden;或overflow:auto;可以清除浮动，
+另外在 IE6 中还需要触发 hasLayout ，例如为父元素设置容器宽高或设置 zoom:1。
+在添加overflow属性后，浮动元素又回到了容器层，把容器高度撑起，达到了清理浮动的效果。
+<body>
+  <div class="news">
+    <img src="1.jpg" alt="">
+    <p>some text</p>
+  
+  </div>
+</body>
+</html>

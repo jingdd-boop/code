@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>方法3</title>
+  <style>
+    .news{
+      background-color: aqua;
+      border:solid 1px black;
+    }
+    .news img {
+      float: left;
+    }
+    .news p {
+      float: left;
+    }
+    .clearfix:after{
+    content: "."; 
+    display: block; 
+    height: 0; 
+    clear: both; 
+    visibility: hidden;  
+    /* 内容，块状，高度零，清除，隐藏 */
+  }
+    /* .clearfix {
+      zoom: 1;
+    } */
+    </style>
+    
+</head>
+<body>
+和 :after 伪元素（注意这不是伪类，而是伪元素，代表一个元素之后最近的元素）和 IEhack ，
+可以完美兼容当前主流的各大浏览器，这里的 IEhack 指的是触发 hasLayout。
+给浮动元素的容器添加一个clearfix的class，
+然后给这个class添加一个:after伪元素实现元素末尾添加一个看不见的块元素（Block element）清理浮动。
+  <div class="news clearfix">
+    <img src="1.jpg" alt="">
+    <p>some text</p>
+  
+  </div>
+
+  通过CSS伪元素在容器的内部元素最后添加了一个看不见的空格"020"或点"."，
+  并且赋予clear属性来清除浮动。
+  需要注意的是为了IE6和IE7浏览器，要给clearfix这个class添加一条zoom:1;触发haslayout。
+</body>
+</html>

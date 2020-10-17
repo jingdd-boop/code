@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>方法1</title>
+  <style>
+    .news{
+      background-color: aqua;
+      border:solid 1px black;
+    }
+    .news img {
+      float: left;
+    }
+    .news p {
+      float: left;
+    }
+    .clear{clear:both;}
+  </style>
+</head>
+<body>
+  在浮动元素后使用一个空元素如<div class="clear"></div>，
+  并在CSS中赋予.clear{clear:both;}属性即可清理浮动。
+  
+  <div class="news">
+    <img src="1.jpg" alt="">
+    <p>some text</p>
+    <div class="clear"></div> 
+  </div>
+
+  优点：简单，代码少，浏览器兼容性好。
+  
+  缺点：需要添加大量无语义的html元素，代码不够优雅，后期不容易维护。
+</body>
+</html>

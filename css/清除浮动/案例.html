@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>清除浮动问题案例</title>
+  <style>
+    .news{
+      background-color: aqua;
+      border:solid 1px black;
+    }
+    .news img {
+      float: left;
+    }
+    .news p {
+      float: left;
+    }
+  </style>
+</head>
+<body>
+  什么是CSS清除浮动？
+  在非IE浏览器（如Firefox）下，
+  当容器的高度为auto，且容器的内容中有浮动（float为left或right）的元素，
+  在这种情况下，容器的高度不能自动伸长以适应内容的高度，
+  使得内容溢出到容器外面而影响（甚至破坏）布局的现象。
+  这个现象叫浮动溢出，为了防止这个现象的出现而进行的CSS处理，就叫CSS清除浮动。
+  <div class="news">
+    <img src="1.jpg" alt="">
+    <p>some text</p>
+  </div>
+  可以看到父元素news的宽度在最上面，没有撑开
+  img，和p元素的高度没有占到父容器的高度
+</body>
+</html>
