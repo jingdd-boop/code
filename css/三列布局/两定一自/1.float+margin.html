@@ -6,25 +6,33 @@
   <title>Document</title>
   <style>
     .parent {
-      display: grid;
-      grid-template-columns: auto 1fr;
+      min-width: 310px;
     }
     .left {
       margin-right: 10px;
+      float: left;
       height: 500px;
-      background-color: deeppink;
+      width: 100px;
+      background-color: khaki;
+    }
+    .center {
+      float: left;
+      height: 500px;
+      width: 100px;
+      background-color: khaki;
     }
     .right {
+      margin-left: 320px;
       height: 500px;
-      background-color: dodgerblue;
+      background-color: lightcoral;
     }
   </style>
 </head>
 <body>
   <div class="parent">
     <div class="left"></div>
+    <div class="center"></div>
     <div class="right"></div>
   </div>
-  
 </body>
 </html>

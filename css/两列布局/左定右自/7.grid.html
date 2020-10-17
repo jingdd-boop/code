@@ -4,8 +4,25 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <style>
+    .parent {
+      width: 100%;
+      height: 500px;
+      display: grid;
+      grid-template-columns: 100px auto;
+    }
+    .left {
+      background-color: cyan;
+    }
+    .right {
+      background-color: darkgoldenrod;
+    }
+  </style>
 </head>
 <body>
-  
+  <div class="parent">
+    <div class="left"></div>
+    <div class="right"></div>
+  </div>
 </body>
 </html>

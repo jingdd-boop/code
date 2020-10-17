@@ -4,8 +4,28 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <style>
+    .parent {
+      display: flex;
+
+    }
+    .left {
+      margin-right: 10px;
+      height: 500px;
+      background-color: darkseagreen;
+    }
+    .right {
+      height: 500px;
+      background-color: deeppink;
+      flex: 1;
+      /* 均分.parent剩余的部分 */
+    }
+  </style>
 </head>
 <body>
-  
+  <div class="parent">
+    <div class="left"></div>
+    <div class="right"></div>
+  </div>
 </body>
 </html>

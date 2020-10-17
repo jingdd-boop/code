@@ -4,8 +4,32 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <style>
+    .parent {
+      position: relative;
+    }
+    .left {
+      position: absolute;
+      top: 0;
+      left: 0;
+      background-color: rgb(52, 219, 219);
+      width: 100px;
+      height: 500px;
+    }
+    .right {
+      position: absolute;
+      top: 0;
+      right: 0;
+      left: 100px;
+      background-color: burlywood;
+      height:500px;
+    }
+  </style>
 </head>
 <body>
-  
+  <div class="parent">
+    <div class="left"></div>
+    <div class="right"></div>
+  </div>
 </body>
 </html>

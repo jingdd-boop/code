@@ -6,25 +6,28 @@
   <title>Document</title>
   <style>
     .parent {
+      height: 500px;
       display: grid;
-      grid-template-columns: auto 1fr;
+      grid-template-columns: 100px 200px auto;
     }
     .left {
       margin-right: 10px;
-      height: 500px;
-      background-color: deeppink;
+      background-color: dodgerblue;
+    }
+    .center {
+      margin-right: 10px;
+      background-color: firebrick;
     }
     .right {
-      height: 500px;
-      background-color: dodgerblue;
+      background-color: fuchsia;
     }
   </style>
 </head>
 <body>
   <div class="parent">
     <div class="left"></div>
+    <div class="center"></div>
     <div class="right"></div>
   </div>
-  
 </body>
 </html>
