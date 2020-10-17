@@ -1,0 +1,3 @@
+var swapPairs = function(head) {
+
+}
