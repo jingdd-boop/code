@@ -3,9 +3,10 @@ function instanceOf(left,right) {
   let proto = left.__proto__;
   let prototype = right.prototype
   while(true) {
+    proto = proto.__proto__;
       if(proto === null) return false
       if(proto === prototype) return true
-      proto = proto.__proto__;
+      
   }
 }
 
@@ -38,3 +39,14 @@ console.log(instanceOf(arr,Array))
 //   }
 
 // }
+
+//10.25
+function instanceOf(left,right) {
+  let proto = left.__proto__;
+  let prototype = right.prototype;
+  while(true) {
+    proto = proto.__proto__;
+    if(proto === null) return false;
+    if(proto === prototype) return true;
+  }
+}
