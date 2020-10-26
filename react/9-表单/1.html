@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <script src="../build/react.development.js"></script>
+    <script src="../build/react-dom.development.js"></script>
+    <script src="../build/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      function BoilingVerdict(props) {
+        if (props.celsius >= 100) {
+          return <p>the water would boil</p>
+        }
+        return <p>the water would not boil</p>
+      }
+
+      class Calculator extends React.Component {
+        constructor(props) {
+          super(props);
+          this.handleChange = this.handleChange.bind(this);
+          this.state = {temperature: ''};
+        }
+
+        handleChange(e) {
+          this.setState({temperature: e.target.value});
+        }
+
+        render() {
+          const temperature = this.state.temperature;
+          return (
+            <fieldset>
+              <legend>enter temperature in celsius:</legend>
+              <input value={temperature}
+                onChange={this.handleChange} />
+                <BoilingVerdict celsius={parseFloat(temperature)} />
+            </fieldset>
+          )
+        }
+      }
+    </script>
+  </body>
+</html>

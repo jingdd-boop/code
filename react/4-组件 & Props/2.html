@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <script src="../build/react.development.js"></script>
+    <script src="../build/react-dom.development.js"></script>
+    <script src="../build/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      function Welcome(props) {
+        return <h1>hello, {props.name}</h1>;
+      }
+
+      const element = <Welcome name="long" />;
+
+      ReactDOM.render(
+        element,
+        document.getElementById('root')
+      );
+
+      //首先调用ReactDOM.render()函数，传入<Welcome name="long" />作为参数
+      //React调用welcome组件，并将name="long"作为 props 传入。
+      //Welcome 组件将 <h1>Hello, Sara</h1> 元素作为返回值。
+      //React DOM 将 DOM 高效地更新为 <h1>Hello, Sara</h1>。
+
+    </script>
+  </body>
+</html>

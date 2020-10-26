@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <script src="../build/react.development.js"></script>
+    <script src="../build/react-dom.development.js"></script>
+    <script src="../build/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      function Mailbox(props) {
+        const unreadMessages = props.unreadMessages;
+        return (
+          <div>
+            <h1>hello</h1>
+            {unreadMessages.length > 0 && 
+              <h2>
+                you are {unreadMessages.length} unread messages
+              </h2>
+            }
+          </div>
+        );
+      }
+        const message = ['react','re；react','re:re:react'];
+
+        ReactDOM.render(
+          <Mailbox unreadMessages={message} />,
+          document.getElementById('root')
+        )
+      
+
+      //之所以能这样做，是因为在 JavaScript 中，true && expression 总是会返回 expression, 
+      //而 false && expression 总是会返回 false。
+      //因此，如果条件是 true，&& 右侧的元素就会被渲染，如果是 false，React 会忽略并跳过它。
+
+
+    </script>
+  </body>
+</html>

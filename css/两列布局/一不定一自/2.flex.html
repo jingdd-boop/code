@@ -5,27 +5,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <style>
-    .parent {
-      display: flex;
+   .parent{
+    display: flex;
+}
+.left { /*不设宽度*/
+    margin-right: 10px;
+    height: 500px;
+    background-color: #f00;
+}
+.right {
+    height: 500px;
+    background-color: #0f0;
+    flex: 1;  /*均分#parent剩余的部分*/
+}
 
-    }
-    .left {
-      margin-right: 10px;
-      height: 500px;
-      background-color: darkseagreen;
-    }
-    .right {
-      height: 500px;
-      background-color: deeppink;
-      flex: 1;
-      /* 均分.parent剩余的部分 */
-    }
+
   </style>
 </head>
 <body>
   <div class="parent">
-    <div class="left"></div>
-    <div class="right"></div>
+    <div class="left">左边不定宽，随内容宽度</div>
+    <div class="right">右边自适应</div>
   </div>
 </body>
 </html>

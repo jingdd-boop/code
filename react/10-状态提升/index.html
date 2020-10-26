@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <script src="../build/react.development.js"></script>
+    <script src="../build/react-dom.development.js"></script>
+    <script src="../build/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+const scaleNames = {
+  c: 'Celsius',
+  f: 'Fahrenheit'
+};
+
+function toCelsius(fahrenheit) {
+  return (fahrenheit - 32) * 5 / 9;
+}
+
+function toFahrenheit(celsius) {
+  return (celsius * 9 / 5) + 32;
+}
+
+function tryConvert(temperature, convert) {
+  const input = parseFloat(temperature);
+  if (Number.isNaN(input)) {
+    return '';
+  }
+  const output = convert(input);
+  const rounded = Math.round(output * 1000) / 1000;
+  return rounded.toString();
+}
+
+function BoilingVerdict(props) {
+  if (props.celsius >= 100) {
+    return <p>The water would boil.</p>;
+  }
+  return <p>The water would not boil.</p>;
+}
+
+class TemperatureInput extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(e) {
+    this.props.onTemperatureChange(e.target.value);
+  }
+
+  render() {
+    const temperature = this.props.temperature;
+    const scale = this.props.scale;
+    return (
+      <fieldset>
+        <legend>Enter temperature in {scaleNames[scale]}:</legend>
+        <input value={temperature}
+               onChange={this.handleChange} />
+      </fieldset>
+    );
+  }
+}
+
+//我们先看Calculator组件，采用class方式写。
+//首先看它的构造函数constructor
+//z在里面绑定了两个函数的this，和state的this，其中数据有两个temperature初始化为‘’空，scale初始化为‘c’，
+class Calculator extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleCelsiusChange = this.handleCelsiusChange.bind(this);
+    this.handleFahrenheitChange = this.handleFahrenheitChange.bind(this);
+    this.state = {temperature: '', scale: 'c'};
+  }
+//使用setState()改变数据，将scale改变成‘c’，同时将温度渲染过来
+  handleCelsiusChange(temperature) {
+    this.setState({scale: 'c', temperature});
+  }
+//使用setState()改变数据，将scale改变成‘f’，同时将温度渲染过来
+  handleFahrenheitChange(temperature) {
+    this.setState({scale: 'f', temperature});
+  }
+//开始渲染ui页面，一共是传入两个参数，scale， temperature
+  render() {
+    const scale = this.state.scale;
+    const temperature = this.state.temperature;
+    //如果是f，则通过tryConvert()函数将它转换成celsius，否则返回温度
+    const celsius = scale === 'f' ? tryConvert(temperature, toCelsius) : temperature;
+    //如果是c，则通过tryConvert()函数将它转换成fahrenheit，否则返回温度
+    const fahrenheit = scale === 'c' ? tryConvert(temperature, toFahrenheit) : temperature;
+    //Calculator一共渲染三个组件
+    return (
+      <div>
+        <TemperatureInput
+          scale="c"
+          temperature={celsius}
+          onTemperatureChange={this.handleCelsiusChange} />
+        <TemperatureInput
+          scale="f"
+          temperature={fahrenheit}
+          onTemperatureChange={this.handleFahrenheitChange} />
+        <BoilingVerdict
+          celsius={parseFloat(celsius)} />
+      </div>
+    );
+  }
+}
+//react 从这里开始渲染，最先到Calculator组件
+ReactDOM.render(
+  <Calculator />,
+  document.getElementById('root')
+);
+
+    </script>
+  </body>
+</html>
+
+
+
