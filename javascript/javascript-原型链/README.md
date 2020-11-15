@@ -49,7 +49,8 @@ function Person() {
 console.log(Person === Person.prototype.constructor);
 //true
 ```
-> 几个元素之间的关系
+> 构造函数，实例对象，实例几个元素之间的关系
+
 ```javascript
 function Person() {
 
@@ -62,3 +63,7 @@ console.log(Person.prototype.constructor == Person) //true
 console.log(Object.getPrototypeOf(person) === Person.prototype)//true
 
 ```
+> 实例和原型之间的关系
+> 原型的原型
+> 原型链： 
+实例-> 原型对象->原型对象的原型->一直到null（或者找到）
