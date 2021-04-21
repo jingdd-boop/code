@@ -1,18 +1,20 @@
 import React from 'react'
 import { Layout, Menu, Breadcrumb } from 'antd';
 import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
+import Logo from './logo.PNG'
+
 const { SubMenu } = Menu;
 const { Header, Content, Sider } = Layout;
+
 function Index(props) {
   return (
     <Layout>
-    <Header className="header">
-      <div className="logo" />
-      <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
-        <Menu.Item key="1">nav 1</Menu.Item>
-        <Menu.Item key="2">nav 2</Menu.Item>
-        <Menu.Item key="3">nav 3</Menu.Item>
-      </Menu>
+    <Header className="header" style={{
+      backgroundColor:'white'
+    }}>
+      <div className="logo" >
+        <img src={Logo} alt="logo" style={{width:'130px' ,marginTop:'-30px'}}></img>
+      </div>
     </Header>
     <Layout>
       <Sider width={200} className="site-layout-background">
