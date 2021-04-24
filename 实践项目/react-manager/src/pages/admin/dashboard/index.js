@@ -2,7 +2,7 @@ import React from 'react'
 
 function Index() {
   return (
-    <div>index</div>
+    <div>我是画板</div>
   )
 }
 

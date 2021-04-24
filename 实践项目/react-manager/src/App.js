@@ -9,7 +9,6 @@ import Frame from './components/Frame/index'
 function App() {
   return (
     <Frame className="App">
-      <div>我是商品</div>
       <Switch>
         {
           adminRoutes.map(route => {
