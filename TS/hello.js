@@ -1,5 +1,5 @@
-function sayHello(person) {
-    return 'Hello, ' + person;
+function sayHello(person: string) {
+  return "Hello, " + person;
 }
-var user = 'Tom';
+let user = "Tom";
 console.log(sayHello(user));
