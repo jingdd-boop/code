@@ -1,4 +1,4 @@
-泛型类
+
 class JingClass<T> {
     jing1: T;
     jing2: (a: T,b: T) => T;
