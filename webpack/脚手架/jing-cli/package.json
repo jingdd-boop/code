@@ -1,0 +1,26 @@
+{
+  "name": "jing-cli",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "bin": {
+    "jing": "./bin/www.js"
+  },
+  "dependencies": {
+    "chalk": "^4.1.1",
+    "commander": "^8.0.0",
+    "download-git-repo": "^3.0.2",
+    "ini": "^2.0.0",
+    "inquirer": "^8.1.1",
+    "log-symbols": "^5.0.0",
+    "ora": "^5.4.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "compile": "babel src -d dist",
+    "watch": "npm run compile -- --watch"
+},
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
