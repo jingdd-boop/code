@@ -1,14 +1,3 @@
-import Header from './header.js'
-import Sidebar from './sidebar.js'
-import Content from './content.js'
-import jing from './jingjing.png'
+var root = document.getElementById('root')
 
-
-// module.export = 
-// var Header= require('./header.js')
-
-new Header()
-new Sidebar()
-new Content()
-
-
+root.innerHTML = ('<div class="test">abc</div>')
