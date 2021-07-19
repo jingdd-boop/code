@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "bundle": "webpack"
+    "watch": "webpack --watch",
+    "start": "webpack-dev-server"
   },
   "author": "",
   "license": "ISC",
@@ -18,7 +19,8 @@
     "sass-loader": "^12.1.0",
     "url-loader": "^4.1.1",
     "webpack": "^5.45.1",
-    "webpack-cli": "^4.7.2"
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.2"
   },
   "dependencies": {
     "css-loader": "^6.0.0",

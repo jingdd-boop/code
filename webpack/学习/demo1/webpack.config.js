@@ -1,10 +1,16 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const CleanWebpackPlugin = require('clean-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 module.exports = {
     mode: 'development', //development  production
+    devtool: 'source-map',
     entry: './src/index.js',
+    devServer: {
+        contentBase: './dist',
+        open: true,
+        port:8080
+    },
     module: {
         rules: [{
             test: /\.(jpg|png|gif)$/,
@@ -37,10 +43,14 @@ module.exports = {
             ]
         }]
     },
-    plugins: [new HtmlWebpackPlugin({
+    plugins: [
+        new HtmlWebpackPlugin({
         template:'src/index.html'
-    }),new CleanWebpackPlugin(['dist'])],
+        }),
+        new CleanWebpackPlugin()
+    ],
     output: {
+        // publicPath:'http..',
         filename: 'bundle.js',
         path: path.resolve(__dirname, 'dist')
     }
