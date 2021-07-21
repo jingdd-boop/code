@@ -1,6 +1,7 @@
 const { readFileSync } = require('fs')
 const { resolve } = require('path')
 const INNER_MARK = '<!-- inner -->'
+const {compileHTML} = require('./compiler')
 class MdToHtmlPlugin {
     constructor({ template, filename }) {
         if (!template) {
@@ -16,8 +17,9 @@ class MdToHtmlPlugin {
             const _templateHtml = readFileSync(resolve(__dirname, 'template.html'), 'utf8')
             const _mdContentArray = _mdContent.split('\n')
             const _htmlStr = compileHTML(_mdContentArray)
+            // console.log(_htmlStr)
             const _finalHTML = _templateHtml.replace(INNER_MARK,_htmlStr)
-            console.log(_mdContent)
+            // console.log(_mdContent,'1')
             _assets[this.filename] = {
                 source() {
                     return _finalHTML

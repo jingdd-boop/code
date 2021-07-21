@@ -73,3 +73,25 @@ constructor({ template, filename }) {
 ```
 
 7. plugin 里面需要使用apply
+```js
+apply(compiler) {
+        compiler.hooks.emit.tap('md-to-html-plugin', (compilation) => {
+            const _assets = compilation.assets; 
+            const _mdContent = readFileSync(this.template, 'utf8'); // 把template的东西取出来
+            const _templateHtml = readFileSync(resolve(__dirname, 'template.html'), 'utf8') 
+            const _mdContentArray = _mdContent.split('\n') // 按换行分组
+            const _htmlStr = compileHTML(_mdContentArray) // compileHTML一个方法
+            const _finalHTML = _templateHtml.replace(INNER_MARK,_htmlStr) // 把template.html里面的注释换成代码
+            console.log(_mdContent)
+            _assets[this.filename] = {
+                source() {
+                    return _finalHTML // 最终的html
+                },
+                size() {
+                    return _finalHTML.length // 长度
+                }
+            }
+           
+        })
+    }
+```
