@@ -16,9 +16,9 @@ function createTreel(_mdArr) {
             if (matched) {
                 const mark = matched[1]
                 const input = matched.input
-                
+                console.log(matched,'matched')
                 if (reg_sharp.test(mark)) {
-                    // console.log(matched,'1')
+                    // console.log(mark,'mark')
                     const tag = `h${mark.length}`;
                     const tagContent = input.replace(reg_mark, '')
                     // console.log(tag, tagContent)
@@ -87,7 +87,7 @@ function compileHTML(_mdContentArray) {
                 _htmlStr += tag;
             })
         } else if (item.type === 'wrap') {
-            console.log(item.tags,'2')
+            // console.log(item.tags,'2')
             let _list = `<${k.split('-')[0]}>`
 
             item.tags.forEach((tag) => {

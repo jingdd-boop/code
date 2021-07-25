@@ -1,5 +1,6 @@
 const { readFileSync } = require('fs')
 const { resolve } = require('path')
+const { Compilation } = require('webpack')
 const INNER_MARK = '<!-- inner -->'
 const {compileHTML} = require('./compiler')
 class MdToHtmlPlugin {
