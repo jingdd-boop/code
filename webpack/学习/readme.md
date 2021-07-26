@@ -169,7 +169,7 @@ output
 publicPath:'http..', 
 如果index.html需要给后端，但是静态资源需要释放到cdn上 可以使用publicPath
 
-
+2021/7/19
 
 sourceMap
 
@@ -188,7 +188,6 @@ sourceMap 它是一个映射关系 他知道dist目录下main.js文件的96行
 ```
 
 webapck DevServer 提升开发效率
-热更新：
 1. package-json  
 需要刷新
 ```js
@@ -227,3 +226,166 @@ npm i webpack-cli@3.3.12 -D
         port:8080
     },
 ```
+
+自己搭建服务器
+npm install express webpack-dev-middleware -D
+
+```js
+ "scripts": {
+    "watch": "webpack --watch",
+    "start": "webpack-dev-server",
+    "middleware": "node serve.js"
+  },
+```
+
+node
+```js
+const express = require('express')
+const webpack = require('webpack')
+const webpackDevMiddleware = require('webpack-dev-middleware')
+const config = require('./webpack.config.js')
+const complier = webpack(config)
+
+const app = express();
+
+app.use(webpackDevMiddleware(complier, {
+    publicPath: config.output.publicPath
+}))
+
+app.listen(3000, () => {
+    console.log('server')
+})
+```
+
+使用webpack-dev-server 打包的文件会到内存中去，提高打包速度性能
+
+HMR 热更新
+html 不改变 css改变 避免重绘  DOC里面 不会重新请求
+
+假设有两个模块
+如果一个模块修改了，但是另一个没有修改，页面会重新整个刷新一遍，就是没有修改的那个模块也会刷新到原先的值，而且会进行请求
+```js
+if (module.hot) {
+    console.log(1)
+    module.hot.accept('./number', () => {
+        document.body.removeChild(document.getElementById('number'))
+        number()
+    })
+}
+```
+
+
+babel 如何解析es6  
+npm install --save-dev babel-loader @babel/core
+
+
+npm install @babel/preset-env --save-dev es5转换成es6
+
+npm install --save @babel/polyfill
+
+解决低版本浏览器兼容问题
+```js
+ {
+    test: /\.m?js$/,
+    exclude: /node_modules/,
+    use: {
+        loader: "babel-loader",
+        options: {
+            presets: [['@babel/preset-env', {
+                 useBuiltIns: 'usage'
+                }]]
+        }
+    }
+}
+```
+
+存在两种 一种是生产环境 一种是写库或是组件的时候，（会影响全局，因此需要另一种配置方式）
+
+2021/7/20
+
+## 配置react 代码打包
+
+npm install --save-dev @babel/preset-react
+
+先转换react 再转换es6
+```js
+"presets": ["@babel/preset-react"]
+```
+
+tree shaking 只支持eES module 静态引入
+
+把一个模块里面没有用的模块去掉 把引入的东西打包
+```js
+ "sideEffects": ["*.css"],
+```
+production 环境下只需要改
+```js
+ mode: 'production', //development  production
+devtool: 'cheap-module-source-map',
+``` 
+
+development  环境下
+```js
+ mode: 'development', //development  production
+ devtool: 'cheap-module-eval-source-map',
+
+ optimization: {
+        usedExports: true
+    },
+
+// pacjage.json:
+
+ "sideEffects": ["*.css"],
+```
+
+
+
+## development  production 的区别
+ 
+开发 development  sourceMap 很全面  不压缩  
+生产  production  sourceMap 简洁 js.map 需要压缩
+
+## webpack 和 code splitting 代码分割
+工具库和业务代码放在一起时，被一起打包了  
+
+1. 打包文件很大，加载时间很长
+2. 业务代码时经常变的，但是工具库基本不需要改动
+
+写两个入口 生成两个打包后的文件 index.html 里面有两个script
+
+main.js被拆成loadsh.js和main.js
+
+当页面的业务逻辑发生改变之后，不需要加载loadsh
+```js
+splitChunks: {
+    chunks: 'all';
+}
+```
+
+代码分割-与webpack无关
+webpack中实现代码分割有两种方式
+1. 同步代码 在webpack.config.js 中配置 optimization的
+```js
+splitChunks: {
+    chunks: 'all';
+}
+```
+
+2. 异步代码：（import）异步代码，无需做配置，会自动帮忙分割，放到新的文件中
+
+
+实现 loader
+
+1. 异常捕获
+2. 国际化
+3. 
+源代码做一些包装
+
+
+实现 plugin
+
+loader和plugin 的区别
+其他格式 loader
+plugin 在某一些具体时刻上 需要一些操作 打包之前 htmlWebpackPlugin 之后clearWebpackPlugin
+
+发布订阅 事件驱动

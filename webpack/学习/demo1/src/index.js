@@ -22,12 +22,15 @@
 //         number()
 //     })
 // }
-import '@babel/polyfill'
-const arr = [
-    new Promise(() => { }),
-    new Promise(() => { })
-]
+// import '@babel/polyfill'
+// const arr = [
+//     new Promise(() => { }),
+//     new Promise(() => { })
+// ]
 
-arr.map(item => {
-    console.log(item)
-})
+// arr.map(item => {
+//     console.log(item)
+// })
+
+import { add } from './math.js'
+add(1,2)

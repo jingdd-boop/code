@@ -1,10 +1,12 @@
 {
   "name": "7.16",
+  "sideEffects": false,
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server"
+    "dev": "webpack-dev-server --config webpack.dev.js",
+    "build": "webpack --config webpack.prod.js"
   },
   "author": "",
   "license": "ISC",
