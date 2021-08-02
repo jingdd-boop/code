@@ -1,12 +1,13 @@
+# typescript
 动态类型语言：运行的时候才知道有错误
 
 静态类型语言： 编译阶段
 
+## 优点
 1. 提供了静态类型风格的类型系统
 2. 从es6到es10的语法支持，在之前我们都是使用babel进行编译的
 3. 兼容各种浏览器，各种系统，各种服务器
-
-为什么要使用ts呢？
+## 为什么要使用ts呢？
 1. 程序更容易理解
 
 之前的问题： 函数或者方法输入输出的参数类型，外部条件
@@ -34,12 +35,12 @@
 
 流行项目都支持 ts--react vue ant design
 
-不足：
+## 不足：
 
 - 增加学习成本 interface
 - 多增加了开发成本
 
-
+## js类型
 javascript基本类型
 7种原始类型
 Boolean
@@ -54,7 +55,9 @@ Object
 
 javascript 中对字符串的操作一定返回新的字符串，原始字符串并没有改变
 
-原始类型：
+
+
+## ts原始类型：
 ```js
 let isDone: boolean = false
 
@@ -73,7 +76,7 @@ let n: null = null
 let num: number = undefined
 ```
 
-任意类型： 通过.没有自动提示方法
+## 任意类型： 通过.没有自动提示方法
 ```js
 let notSure: any = 4
 notSure = 'jing'
@@ -84,7 +87,7 @@ notSure.myFn()
 // notSure. 没有任何提示
 ```
 
-联合类型
+## 联合类型
 ```js
 let numberOrString: number | string
 numberOrString = 'aaa'
@@ -92,14 +95,14 @@ numberOrString = 3
 // numberOrString = false 报错
 ```
 
-Array:
+## Array:
 ```js
 let arrOgNumber: number[] = [1, 2, 3]
 // arrOgNumber.push('5') 报错
 arrOgNumber.push(5)
 ```
 
-元组 Tuple
+## 元组 Tuple
 ```js
 let user: [string, number] = ['jing', 30]
 user = ['jing'] // 报错
@@ -107,7 +110,7 @@ user = ['jing', 2, 3] // 报错
 // 多了少了都会报错
 ```
 
-接口：
+## interface接口：
 1. 对对象的形状进行描述
 2. 对类进行抽象
 3. 鸭子类型
@@ -123,7 +126,7 @@ let jing: Person = {
 }
 ```
 
-可选属性：
+## 可选属性：？
 ```js
 interface Person {
     name: string;
@@ -135,7 +138,7 @@ let jing: Person = {
 }
 ```
 
-只读属性
+## 只读属性readonly
 ```js
 interface Person {
     readonly id: number
@@ -171,10 +174,271 @@ add(1, 2, 3)
 const add2: (x: number, y: number, z?: number) => number = add
 ```
 
-类型推论:
+## 类型推论:
 
 ```js
 let str = 'str'
 str = 123 // 报错 ts编译推论 str是一个string类型
 
+```
+
+## class 类
+类: 定义了一切事物的抽象概念
+对象： 类的实例
+面向对象： 封装 继承 多态
+
+```js
+class Animal {
+    name: string;
+    constructor(name: string) {
+        this.name = name
+    }
+    run() {
+        return `${this.name} is running`
+    }
+}
+
+const dog = new Animal('jing')
+console.log(dog.name)
+
+class Dog extends Animal {
+    bark() {
+        return `${this.name} is barking`
+    }
+}
+
+const wang = new Dog('zhihao');
+console.log(wang.name, wang.bark) 
+// jing
+// zhihao [Function: bark]
+
+class Cat extends Animal {
+    // 子类调用父类 要使用super
+    constructor(name: string) {
+        super(name)
+        console.log(name) // jj
+    }
+    // 子类重写父类的run方法
+    run() {
+        return 'ming' + super.run()
+    }
+}
+
+const zhi = new Cat('jj')
+console.log(zhi.run())
+//mingjj is running
+```
+
+public  都可以使用
+private 只有class内部可以使用
+protected(只有子类可以使用，new出来的实例不能使用)
+readonly 只可以读 不能修改
+static
+```js
+class Animal {
+    name: string;
+    static zhihao: string[] =
+        ['am', 'hi']
+    static isAnimal(a: any) {
+        return a instanceof Animal
+    }
+    constructor(name: string) {
+        this.name = name
+    }
+    public run() {
+        return `${this.name} is running`
+    }
+}
+
+const dog = new Animal('jing')
+console.log(Animal.zhihao) // [ 'am', 'hi' ]
+console.log(Animal.isAnimal(dog)) // true
+```
+## interface implements  去验证类的属性和方法
+```js
+interface Radio {
+    switchRadio(): void;
+}
+interface Battery {
+    checkBatteryStatus(): void;
+}
+
+// 将上面两个接口合并:
+interface RadioWithBattery extends Radio {
+    checkBatteryStatus()
+}
+class Car implements Radio{
+    switchRadio() {
+
+    }
+}
+
+// class Phone implements Radio 合并后使用
+class Phone implements Radio, Battery{
+    switchRadio() {
+        
+    }
+    checkBatteryStatus() {
+
+    }
+}
+```
+## 枚举 enums
+
+使用const 常量枚举，可以提高性能
+```js
+const enum Direction {
+    up = 'up',
+    down = 'down',
+    left = 'left',
+    right = 'right',
+}
+
+const value = 'up'
+if (value === Direction.up) {
+    console.log('go up')
+}
+```
+
+编译后生成的代码
+
+不用const
+```js
+var Direction;
+(function (Direction) {
+    Direction["up"] = "up";
+    Direction["down"] = "down";
+    Direction["left"] = "left";
+    Direction["right"] = "right";
+})(Direction || (Direction = {}));
+var value = 'up';
+if (value === Direction.up) {
+    console.log('go up');
+}
+
+```
+用const
+```js
+var value = 'up';
+if (value === "up" /* up */) {
+    console.log('go up');
+}
+```
+
+## 泛型
+怎么出现 
+
+## 泛型约束
+```js
+function echoWithArr<T>(arg: T[]): T[] {
+    console.log(arg.length)
+    return arg
+}
+
+const arrs = echoWithArr([1,2,3])
+
+```
+只要在interface上定义的length存在
+```js
+interface IwithLength {
+    length: number
+}
+
+function echoWithLength<T extends IwithLength>(arg: T): T {
+    console.log(arg.length)
+    return arg
+}
+
+const str = echoWithLength('str')
+const obj = echoWithLength({ length: 10 })
+const arr2 = echoWithLength([1, 2, 3])
+const num = echoWithLength(1) // 类型“number”的参数不能赋给类型“IwithLength”的参数
+```
+
+### 类 class + 泛型
+```js
+class Queue<T> {
+    private data = [];
+    push(item: T) {
+        return this.data.push(item)
+    }
+    pop() : T {
+        return this.data.shift()
+    }
+}
+
+const que = new Queue<number>()
+que.push(1)
+// que.push('str')
+console.log(que.pop().toFixed())
+console.log(que.pop().toFixed())
+
+const que1 = new Queue<string>()
+que1.push('1');
+console.log(que1.pop().length)
+
+interface KeyPair<T, U> {
+    key: T
+    value: U
+}
+let kp1: KeyPair<number, string> = { key: 1, value: "str" }
+let kp2: KeyPair<string, number> = { key: 'text', value: 1 }
+```
+### 数组+泛型
+```js
+let arr: number[] = [1, 2, 4]
+let arrTow: Array<number> = [1, 2, 3]
+```
+
+### 函数+泛型
+```js
+interface IPlus<T> {
+    (a: T,b: T) : T
+}
+function plus(a: number, b: number): number {
+    return a + b;
+}
+function plus1(a: string, b: string): string {
+    return a + b;
+}
+const a: IPlus<number> = plus
+const b: IPlus<string> = plus1
+```
+
+## 类型别名
+给函数取别名
+```js
+type PlusType = (x: number,y: number) => number
+function sum(x: number, y: number): number {
+    return x + y
+}
+const sum2: PlusType = sum
+```
+
+在使用联合类型的时候：
+```js
+type NameResolver = () => string
+type NameOrResolve = string | NameResolver
+function getName(n: NameOrResolve): string {
+    if (typeof n === 'string') {
+        return n
+    } else {
+        return n()
+    }
+}
+
+```
+
+## 函数断言
+as关键字  如果是来拟合类型，那么他只能渠道两个设置类型的共有属性，可以使用as属性取那些我们需要使用的值
+```js
+function getLength(input: string | number): number {
+    const str = input as String
+    if (str.length) {
+        return str.length;
+    } else {
+        const number = input as Number
+        return number.toString().length
+    }
+}
 ```
