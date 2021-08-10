@@ -122,3 +122,100 @@ function countReducer(state, action) {
 }
 ```
 
+
+useReducer useContext  实现 Redux state
+
+useContext 避免一层层传递
+
+redux 状态全局化 统一管理
+
+action 更新
+
+reducer 处理复杂的状态
+
+代码小案例：首先一行文字，下面由两个按钮，可以控制它的颜色
+
+
+
+- 一个显示文字组件showArea
+文字的颜色由color控制
+```js
+import React, { useContext } from 'react';
+import {ColorContext} from './color'
+
+function ShowArea() {
+    const {color} = useContext(ColorContext)
+    return (
+        <div style={{ color: color }}>字体颜色{ color }</div>
+    )
+}
+
+```
+
+- 一个color组件去管理这些颜色    
+使用createContext   
+```js
+export const UPDATE_COLOR = "UPDATE_COLOR"
+
+const reducer = (state,action) => {
+    switch (action.type) {
+        case UPDATE_COLOR:
+            return action.color
+        default:
+            return state
+    }
+}
+
+export const Color = props => {
+    const [color,dispatch] = useReducer(reducer,'blue')
+    return (
+        <ColorContext.Provider value={{color,dispatch}}>
+            {props.children}
+        </ColorContext.Provider>
+    )
+}
+
+
+```
+
+- 一个父组件 UseRedux  引入button 文字  颜色控制组件
+```js
+import React from 'react';
+import Buttons from './Button';
+import ShowArea from './showArea';
+import {Color} from './color'
+
+function UseRedux() {
+    return (
+        <div>
+            <Color>
+                <ShowArea />
+                <Buttons />
+            </Color>
+            
+        </div>
+    )
+}
+
+```
+
+-- 设计一个按钮组件Button
+```js
+import React, { useContext } from 'react';
+import {ColorContext,UPDATE_COLOR} from './color'
+
+function Buttons() {
+    const {dispatch} = useContext(ColorContext)
+    return (
+        <div>
+            <button onClick={() => {dispatch({type:UPDATE_COLOR,color:'red'})}}>红色</button>
+            <button onClick={() => {dispatch({type:UPDATE_COLOR,color:'yellow'})}}>黄色</button>
+        </div>
+    )
+}
+
+export default Buttons
+
+```
+
+

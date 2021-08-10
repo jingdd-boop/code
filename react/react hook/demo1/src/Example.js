@@ -4,6 +4,7 @@ import Example2 from './Example2';
 import EffectHooks from './EffectHooks';
 import ContextHooks from './useContextHooks';
 import UseReducer from './useRducerHooks';
+import UseRedux from './example3/UseRedux';
 
 class Example extends Component {
     constructor(props) {
@@ -22,6 +23,7 @@ class Example extends Component {
                 <EffectHooks></EffectHooks>
                 <ContextHooks></ContextHooks>
                 <UseReducer></UseReducer>
+                <UseRedux></UseRedux>
             </div>
          );
     }
