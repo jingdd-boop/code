@@ -123,7 +123,7 @@ function countReducer(state, action) {
 ```
 
 
-useReducer useContext  实现 Redux state
+## useReducer useContext  实现 Redux state
 
 useContext 避免一层层传递
 
@@ -218,4 +218,131 @@ export default Buttons
 
 ```
 
+
+## useMemo
+
+shouldComponentUpdate 组件更新之前需要先对比状态，如果状态发生了改变，再更新
+
+但是在useEffect中 没有这个功能  因此我们需要使用的是useMemo
+
+
+```js
+import React, { useState,useMemo } from 'react'
+
+// 父组件
+function useMemoHooks() { 
+    const [jing1, setJing1] = useState('婧')
+    const [jing2, setJing2] = useState('婧1')
+    
+    return (
+        <>
+            <button onClick={() => { setJing1(new Date().getTime()) }}>jing1</button>
+            <button onClick={() => { setJing2(new Date().getTime() + 'jing2') }}>jing2</button>
+            <Child name={jing1}>{ jing2}</Child> // name children
+        </>
+    )
+}
+
+// 子组件 
+function Child({ name, children }) {
+    function changejing1() {
+        console.log('jing1执行')
+        return name+'jing1'
+    }
+
+    // 只有name的属性更新才更新
+    const actionjing1 = useMemo(() => changejing1(name),[name])  // 使用useMemo 只更新需要更新的部分
+
+    return (
+        <>
+            <div>{ actionjing1 }</div>
+            <div>{ children }</div>
+        </>
+    )
+}
+
+export default useMemoHooks
+```
+
+
+
+
+## useRef
+- 通过dom，去改变值，而不是状态
+
+- useRef可以保存变量(少用)
+
+```js
+import React, { useRef, useState, useEffect } from 'react'
+
+function UseRefHooks() {
+    const inputEl = useRef(null);
+
+    const onButtonClick = () => {
+        inputEl.current.value = "hello"
+        console.log(inputEl)
+    }
+
+    const [text, setText] = useState('jing')
+    const textRef = useRef()
+    useEffect(() => {
+        textRef.current = text
+        console.log('textRef.current',textRef.current)
+    })
+    return (
+        <>
+            <input ref={inputEl} text="text"></input>
+            <button onClick={onButtonClick}>文字</button>
+
+            <input value={text} onChange={(e) => {setText(e.target.value)}}></input>
+        </>
+    )
+}
+
+export default UseRefHooks
+```
+
+
+## 自定义hooks
+监听窗口的宽高
+```js
+import React, { useState, useEffect, useCallback } from 'react';
+
+function useWinSize() {
+    const [size, setSize] = useState({
+        with: document.documentElement.clientWidth,
+        higth: document.documentElement.clientHeight,
+    })
+
+    // useCallback 缓存方法  useMemo缓存属性变量
+    const onRest = useCallback(() => {
+        setSize({
+            with: document.documentElement.clientWidth,
+            higth: document.documentElement.clientHeight,
+        })
+    }, [])
+    
+    useEffect(() => {
+        window.addEventListener('resize', onRest, false)
+        return () => {
+            window.removeEventListener('resize',onRest)
+        }
+    }, [])
+    
+    return size
+}
+
+
+
+function Examplejing() {
+    const size = useWinSize();
+    return (
+        <>
+            页面的size{size.with},{size.higth}
+        </>
+    )
+}
+
+export default Examplejing
+```
 
